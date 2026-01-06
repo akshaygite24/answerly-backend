@@ -21,7 +21,7 @@ The project focuses on **clean API design, authentication, permissions, and real
 
 ---
 
-## 🛠 Tech Stack
+## Tech Stack
 
 - Python
 - Django
