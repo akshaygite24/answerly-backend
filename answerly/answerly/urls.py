@@ -26,6 +26,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     # app APIs
+    path('api/', include('apps.accounts.urls')),
     path('api/', include('apps.questions.urls')),
     path('api/', include('apps.answers.urls')),
     path('api/', include('apps.votes.urls')),
