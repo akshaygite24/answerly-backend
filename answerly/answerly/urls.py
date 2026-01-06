@@ -27,7 +27,7 @@ urlpatterns = [
 
     # app APIs
     path('api/', include('apps.questions.urls')),
-
+    path('api/', include('apps.answers.urls')),
 
     # JWT auth
     path('api/auth/login/', TokenObtainPairView.as_view()),
