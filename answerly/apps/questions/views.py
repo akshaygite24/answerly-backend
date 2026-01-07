@@ -19,4 +19,4 @@ class QuestionViewSet(ModelViewSet):
         if tag:
             queryset = queryset.filter(tags__name=tag.lower())
 
-        return queryset
+        return queryset.order_by('created_at')
