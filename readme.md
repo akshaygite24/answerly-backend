@@ -17,6 +17,9 @@ The project focuses on **clean API design, authentication, permissions, and real
 - Author-only edit & delete permissions
 - User reputation system (automatic, via Django signals)
 - User profile API (reputation)
+- Tag system for questions
+- Question filtering by tag
+- Public user profiles (view by username)
 - Backend-first, frontend-agnostic design
 
 ---
@@ -26,7 +29,8 @@ The project focuses on **clean API design, authentication, permissions, and real
 - Python
 - Django
 - Django REST Framework
-- PostgreSQL
+- SQLite (local development)
+- PostgreSQL (production-ready)
 - Simple JWT (authentication)
 
 ---
@@ -102,19 +106,26 @@ Reputation is stored in a **Profile model** linked one-to-one with the User.
 
 ### Questions
 - `GET /api/questions/` – List questions
+- `GET /api/questions/?tag=<tag>` – Filter questions by tag
 - `POST /api/questions/` – Create question
-- `PUT /api/questions/{id}/` – Update (author only)
+- `PATCH /api/questions/{id}/` – Update (author only)
 - `DELETE /api/questions/{id}/` – Delete (author only)
+
 
 ### Answers
 - `GET /api/answers/?question=<id>` – List answers for a question
 - `POST /api/answers/` – Create answer
+- `PATCH /api/answers/{id}/` – Update answer (author only)
+- `DELETE /api/answers/{id}/` – Delete answer (author only)
+
 
 ### Voting
 - `POST /api/vote/` – Vote on a question or answer
 
 ### Profile
-- `GET /api/profile/` – Get logged-in user profile & reputation
+- `GET /api/profile/` – Get logged-in user profile
+- `GET /api/profile/<username>/` – Public user profile
+
 
 ---
 
