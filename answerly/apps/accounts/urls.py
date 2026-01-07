@@ -1,6 +1,10 @@
 from django.urls import path
-from .views import ProfileAPIView
+from .views import ProfileAPIView,PublicProfileAPIView
 
 urlpatterns = [
-    path('profile/', ProfileAPIView.as_view())
+    # private profile
+    path('profile/', ProfileAPIView.as_view()),
+
+    # public profile
+    path('profile/<str:username>/', PublicProfileAPIView.as_view()),
 ]

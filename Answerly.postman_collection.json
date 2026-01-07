@@ -231,7 +231,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"question\": 1,\r\n  \"body\": \"This is an answer\"\r\n}\r\n",
+							"raw": "{\r\n  \"question\": 2,\r\n  \"body\": \"This is an third answer\"\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -253,6 +253,44 @@
 					"response": []
 				},
 				{
+					"name": "Edit Answer",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"body\": \"This is an answer edited\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/answers/1/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"answers",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "List Answers by Question",
 					"request": {
 						"auth": {
@@ -261,7 +299,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/api/answers/?question=1",
+							"raw": "{{base_url}}/api/answers/?question=2",
 							"host": [
 								"{{base_url}}"
 							],
@@ -273,8 +311,37 @@
 							"query": [
 								{
 									"key": "question",
-									"value": "1"
+									"value": "2"
 								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Answers",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/answers/14/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"answers",
+								"14",
+								""
 							]
 						}
 					},
@@ -354,6 +421,26 @@
 							"path": [
 								"api",
 								"profile",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Public Profile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/profile/user1/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"profile",
+								"user1",
 								""
 							]
 						}
