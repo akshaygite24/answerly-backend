@@ -10,7 +10,16 @@ class AnswerSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Answer
-        fields = '__all__'
+        fields = [
+            "id",
+            "question",
+            "author",
+            "body",
+            "upvotes",
+            "downvotes",
+            "created_at",
+            "updated_at",
+        ]
 
     def get_upvotes(self, obj):
         content_type = ContentType.objects.get_for_model(Answer)
