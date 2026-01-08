@@ -11,6 +11,17 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config
+import dj_database_url
+
+
+
+
+SECRET_KEY = config("SECRET_KEY")
+
+DEBUG = config("DEBUG", default=False, cast=bool)
+
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", ".onrender.com"]
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,12 +31,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-vz4qr4)nxw+b%*zfhmn4d!*oalgnysy03#cv1go_andkisczeb'
+# SECRET_KEY = 'django-insecure-vz4qr4)nxw+b%*zfhmn4d!*oalgnysy03#cv1go_andkisczeb'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = []
+
+
 
 
 # Application definition
@@ -51,6 +64,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -84,13 +98,18 @@ WSGI_APPLICATION = 'answerly.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
+DATABASES = {
+    "default": dj_database_url.config(
+        default="sqlite:///db.sqlite3"
+    )
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
@@ -120,6 +139,8 @@ REST_FRAMEWORK = {
 }
 
 
+MIDDLEWARE.insert(0, "corsheaders.middleware.CorsMiddleware")
+
 CORS_ALLOW_ALL_ORIGINS = True
 
 # Internationalization
@@ -137,4 +158,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
-STATIC_URL = 'static/'
+# STATIC_URL = 'static/'
+
+STATIC_URL = "/static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
